@@ -7,6 +7,10 @@
   --brand-soft: #b6e832;
   --muted: #9ca3af;
   --line: #e5e7eb;
+  --forest: #1b3e2f;
+  --forest-soft: #244a39;
+  --dash-bg: #f4f6f5;
+  --dash-card: #ffffff;
 }
 
 @theme inline {
@@ -16,6 +20,10 @@
   --color-brand-soft: var(--brand-soft);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-forest: var(--forest);
+  --color-forest-soft: var(--forest-soft);
+  --color-dash-bg: var(--dash-bg);
+  --color-dash-card: var(--dash-card);
   --font-sans: var(--font-outfit);
   --font-display: var(--font-syne);
 }
@@ -121,4 +129,361 @@ body {
   position: relative;
   z-index: 1;
   border-radius: calc(2rem - 4px);
+}
+
+/* Shared blob card base */
+.card-blob {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55) inset,
+    0 12px 28px rgba(27, 62, 47, 0.07);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-blob:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 16px 34px rgba(27, 62, 47, 0.11);
+}
+
+.card-blob > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Variant A — right-side bulge */
+.card-blob-a {
+  border-radius: 1.5rem 4.5rem 4.5rem 1.5rem / 1.5rem 52% 52% 1.5rem;
+}
+
+.card-blob-a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(27, 62, 47, 0.1), transparent 42%),
+    radial-gradient(80% 70% at 92% 78%, rgba(27, 62, 47, 0.05), transparent 55%);
+}
+
+.card-blob-a::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  right: -8%;
+  z-index: 0;
+  width: 44%;
+  height: 84%;
+  pointer-events: none;
+  border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
+  background: linear-gradient(
+    160deg,
+    rgba(27, 62, 47, 0.1),
+    rgba(27, 62, 47, 0.02) 60%,
+    transparent
+  );
+}
+
+.card-blob-a.is-forest::before {
+  background:
+    radial-gradient(120% 90% at 100% 8%, rgba(255, 255, 255, 0.18), transparent 45%),
+    radial-gradient(70% 80% at 88% 100%, rgba(0, 0, 0, 0.12), transparent 50%);
+}
+
+.card-blob-a.is-forest::after {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.04) 55%,
+    transparent
+  );
+}
+
+/* Variant B — left-side bulge */
+.card-blob-b {
+  border-radius: 4.5rem 1.5rem 1.5rem 4.5rem / 52% 1.5rem 1.5rem 52%;
+}
+
+.card-blob-b::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(110% 85% at 0% 15%, rgba(27, 62, 47, 0.1), transparent 45%),
+    radial-gradient(70% 65% at 12% 90%, rgba(36, 74, 57, 0.06), transparent 55%);
+}
+
+.card-blob-b::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: -10%;
+  z-index: 0;
+  width: 46%;
+  height: 80%;
+  pointer-events: none;
+  border-radius: 45% 55% 48% 52% / 50% 42% 58% 50%;
+  background: linear-gradient(
+    200deg,
+    rgba(27, 62, 47, 0.1),
+    transparent 70%
+  );
+}
+
+.card-blob-b.is-forest::before {
+  background:
+    radial-gradient(110% 85% at 0% 20%, rgba(255, 255, 255, 0.18), transparent 48%),
+    radial-gradient(70% 70% at 15% 100%, rgba(0, 0, 0, 0.14), transparent 55%);
+}
+
+.card-blob-b.is-forest::after {
+  background: linear-gradient(
+    200deg,
+    rgba(255, 255, 255, 0.15),
+    transparent 70%
+  );
+}
+
+/* Variant C — top blob / capsule corners */
+.card-blob-c {
+  border-radius: 3.25rem 3.25rem 1.35rem 1.35rem / 60% 60% 1.35rem 1.35rem;
+}
+
+.card-blob-c::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 50% -10%, rgba(27, 62, 47, 0.12), transparent 50%),
+    radial-gradient(60% 50% at 85% 30%, rgba(36, 74, 57, 0.06), transparent 60%);
+}
+
+.card-blob-c::after {
+  content: "";
+  position: absolute;
+  top: -28%;
+  left: 18%;
+  z-index: 0;
+  width: 64%;
+  height: 70%;
+  pointer-events: none;
+  border-radius: 50% 50% 45% 55%;
+  background: radial-gradient(
+    circle at 50% 60%,
+    rgba(27, 62, 47, 0.09),
+    transparent 68%
+  );
+}
+
+.card-blob-c.is-forest::before {
+  background:
+    radial-gradient(90% 70% at 50% -5%, rgba(255, 255, 255, 0.2), transparent 52%),
+    radial-gradient(60% 50% at 80% 40%, rgba(0, 0, 0, 0.1), transparent 60%);
+}
+
+.card-blob-c.is-forest::after {
+  background: radial-gradient(
+    circle at 50% 60%,
+    rgba(255, 255, 255, 0.14),
+    transparent 68%
+  );
+}
+
+/* Variant D — diagonal / bottom-right blob */
+.card-blob-d {
+  border-radius: 1.35rem 2.75rem 4.75rem 2.75rem / 1.35rem 35% 55% 40%;
+}
+
+.card-blob-d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(100% 90% at 100% 100%, rgba(27, 62, 47, 0.11), transparent 48%),
+    radial-gradient(70% 60% at 20% 20%, rgba(36, 74, 57, 0.05), transparent 55%);
+}
+
+.card-blob-d::after {
+  content: "";
+  position: absolute;
+  right: -12%;
+  bottom: -22%;
+  z-index: 0;
+  width: 58%;
+  height: 72%;
+  pointer-events: none;
+  border-radius: 48% 52% 45% 55% / 55% 40% 60% 45%;
+  background: linear-gradient(
+    40deg,
+    rgba(27, 62, 47, 0.12),
+    transparent 65%
+  );
+}
+
+.card-blob-d.is-forest::before {
+  background:
+    radial-gradient(100% 90% at 100% 100%, rgba(0, 0, 0, 0.16), transparent 48%),
+    radial-gradient(70% 60% at 15% 10%, rgba(255, 255, 255, 0.16), transparent 55%);
+}
+
+.card-blob-d.is-forest::after {
+  background: linear-gradient(
+    40deg,
+    rgba(255, 255, 255, 0.14),
+    transparent 65%
+  );
+}
+
+/* Worm loader — black / forest theme */
+.worm-loader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.worm-loader__svg {
+  display: block;
+  width: 8em;
+  height: 8em;
+}
+
+.worm-loader--sm .worm-loader__svg {
+  width: 3.25em;
+  height: 3.25em;
+}
+
+.worm-loader--md .worm-loader__svg {
+  width: 5em;
+  height: 5em;
+}
+
+.worm-loader--lg .worm-loader__svg {
+  width: 8em;
+  height: 8em;
+}
+
+.worm-loader__worm1,
+.worm-loader__worm2,
+.worm-loader__worm2-1 {
+  animation: worm1 5s ease-in infinite;
+}
+
+.worm-loader__worm1 {
+  transform-origin: 64px 64px;
+}
+
+.worm-loader__worm2,
+.worm-loader__worm2-1 {
+  transform-origin: 22px 22px;
+}
+
+.worm-loader__worm2 {
+  animation-name: worm2;
+  animation-timing-function: linear;
+}
+
+.worm-loader__worm2-1 {
+  animation-name: worm2-1;
+  stroke-dashoffset: 175.92;
+}
+
+@keyframes worm1 {
+  from,
+  to {
+    stroke-dashoffset: 0;
+  }
+
+  12.5% {
+    animation-timing-function: ease-out;
+    stroke-dashoffset: -175.91;
+  }
+
+  25% {
+    animation-timing-function: cubic-bezier(0, 0, 0.43, 1);
+    stroke-dashoffset: -307.88;
+  }
+
+  50% {
+    animation-timing-function: ease-in;
+    stroke-dashoffset: -483.8;
+  }
+
+  62.5% {
+    animation-timing-function: ease-out;
+    stroke-dashoffset: -307.88;
+  }
+
+  75% {
+    animation-timing-function: cubic-bezier(0, 0, 0.43, 1);
+    stroke-dashoffset: -175.91;
+  }
+}
+
+@keyframes worm2 {
+  from,
+  12.5%,
+  75%,
+  to {
+    transform: rotate(0) translate(-42px, 0);
+  }
+
+  25%,
+  62.5% {
+    transform: rotate(0.5turn) translate(-42px, 0);
+  }
+}
+
+@keyframes worm2-1 {
+  from {
+    stroke-dashoffset: 175.91;
+    transform: rotate(0);
+  }
+
+  12.5% {
+    animation-timing-function: cubic-bezier(0, 0, 0.42, 1);
+    stroke-dashoffset: 0;
+    transform: rotate(0);
+  }
+
+  25% {
+    animation-timing-function: linear;
+    stroke-dashoffset: 0;
+    transform: rotate(1.5turn);
+  }
+
+  37.5%,
+  50% {
+    stroke-dashoffset: -175.91;
+    transform: rotate(1.5turn);
+  }
+
+  62.5% {
+    animation-timing-function: cubic-bezier(0, 0, 0.42, 1);
+    stroke-dashoffset: 0;
+    transform: rotate(1.5turn);
+  }
+
+  75% {
+    animation-timing-function: linear;
+    stroke-dashoffset: 0;
+    transform: rotate(0);
+  }
+
+  87.5%,
+  to {
+    stroke-dashoffset: 175.92;
+    transform: rotate(0);
+  }
 }

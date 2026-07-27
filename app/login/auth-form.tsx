@@ -136,7 +136,6 @@ export default function AuthForm() {
                 />
               </label>
             </div>
-
             <button
               type="submit"
               disabled={loading}
