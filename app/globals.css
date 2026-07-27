@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c1a0f;
+  --foreground: #121212;
+  --brand: #d4ff3a;
+  --brand-soft: #b6e832;
+  --muted: #9ca3af;
+  --line: #e5e7eb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-syne);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-outfit), "Segoe UI", sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.9s ease-out 0.15s both;
+}
+
+.animate-fade-scale {
+  animation: fade-scale 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-drift {
+  animation: drift 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes border-light-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.video-frame-glow {
+  position: relative;
+  border-radius: 2rem;
+  padding: 4px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.video-frame-glow::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  z-index: 0;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.12) 300deg,
+    rgba(255, 255, 255, 0.55) 320deg,
+    rgba(255, 255, 255, 1) 340deg,
+    rgba(255, 255, 255, 0.55) 350deg,
+    transparent 360deg
+  );
+  animation: border-light-spin 8s linear infinite;
+}
+
+.video-frame-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow:
+    0 0 22px rgba(255, 255, 255, 0.28),
+    0 0 48px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.video-frame-glow > .video-frame-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(2rem - 4px);
 }
